@@ -3,12 +3,15 @@ package com.example.jetpackdemo;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+
+import com.example.jetpackdemo.databus.LiveDataBus;
 
 import java.util.jar.Attributes;
 
@@ -42,5 +45,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void changeText(View view) {
         mNameViewModel.getCurrentName().setValue("Jhao" + i++);
+    }
+
+    public void testLiveDataBus(View view) {
+        startActivity(new Intent(this, TestLiveDataBusActivity.class));
+        //发送消息
+        LiveDataBus.getInstance().with("data", String.class).setValue("jhao");
     }
 }
