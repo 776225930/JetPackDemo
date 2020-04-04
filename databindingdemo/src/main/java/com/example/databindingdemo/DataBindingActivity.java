@@ -19,7 +19,7 @@ public class DataBindingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 //        setContentView(R.layout.activity_data_binding);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_data_binding);
-        mStudent = new Student("Tom", "14");
+        mStudent = new Student("14", "Tom");
         mBinding.setStudent(mStudent);
 
 
@@ -29,6 +29,7 @@ public class DataBindingActivity extends AppCompatActivity {
                 for (int i = 0; i < 10; i++) {
                     SystemClock.sleep(2000);
                     mStudent.setName(mStudent.getName() + i);
+                    mBinding.setVariable(BR.student, mStudent);
                     Log.e(TAG, "run: " + mStudent);
                 }
             }
