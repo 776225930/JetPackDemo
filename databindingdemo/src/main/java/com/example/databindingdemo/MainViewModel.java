@@ -1,6 +1,7 @@
 package com.example.databindingdemo;
 
 import android.content.Context;
+import android.content.Intent;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -75,6 +76,10 @@ public class MainViewModel {
         } else {
             Toast.makeText(mContext, "用户名或密码不能为空", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void jump(View view) {
+        mContext.startActivity(new Intent(mContext, DataBindingActivity.class));
     }
 }
 
