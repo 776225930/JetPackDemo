@@ -1,6 +1,7 @@
 package com.example.databindingdemo;
 
 import androidx.databinding.BaseObservable;
+import androidx.databinding.Bindable;
 import androidx.databinding.Observable;
 
 /**
@@ -19,6 +20,7 @@ public class Student extends BaseObservable {
         this.name = name;
     }
 
+    @Bindable
     public String getId() {
         return id;
     }
@@ -27,12 +29,14 @@ public class Student extends BaseObservable {
         this.id = id;
     }
 
+    @Bindable
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+        notifyPropertyChanged(BR.name);
     }
 
     @Override

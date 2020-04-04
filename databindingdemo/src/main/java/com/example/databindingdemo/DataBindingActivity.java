@@ -29,7 +29,7 @@ public class DataBindingActivity extends AppCompatActivity {
                 for (int i = 0; i < 10; i++) {
                     SystemClock.sleep(2000);
                     mStudent.setName(mStudent.getName() + i);
-                    mBinding.setVariable(BR.student, mStudent);
+//                    mBinding.setVariable(BR.student, mStudent);
                     Log.e(TAG, "run: " + mStudent);
                 }
             }
