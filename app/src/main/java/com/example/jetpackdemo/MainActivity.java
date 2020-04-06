@@ -1,11 +1,15 @@
 package com.example.jetpackdemo;
 
+import androidx.arch.core.util.Function;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
+
 import android.content.Intent;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -42,12 +46,29 @@ public class MainActivity extends AppCompatActivity {
     int i = 0;
 
     public void changeText(View view) {
-        mNameViewModel.getCurrentName().setValue("Jhao" + i++);
+        mNameViewModel.getCurrentName().setValue("Jhao" + mNameViewModel.i++);
     }
 
     public void testLiveDataBus(View view) {
         startActivity(new Intent(this, TestLiveDataBusActivity.class));
         //发送消息
-        LiveDataBus.getInstance().with("data", String.class).setValue("jhao");
+        //LiveDataBus.getInstance().with("data", String.class).setValue("jhao");
+        Intent intent = new Intent(this, TestLiveDataBusActivity.class);
+        startActivity(intent);
+        new Thread() {
+            @Override
+            public void run() {
+                for (int i = 0; i < 10; i++) {
+                    //发送消息
+                    LiveDataBus.getInstance().with("data", String.class).postValue("jett");
+                    try {
+                        Log.e(TAG, "run: " + i);
+                        Thread.sleep(5000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }.start();
     }
 }
