@@ -11,11 +11,13 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.example.jetpackdemo.databus.LiveDataBus;
+import com.example.jetpackdemo.databus.LiveDataBusX;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -50,25 +52,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void testLiveDataBus(View view) {
-        startActivity(new Intent(this, TestLiveDataBusActivity.class));
+         //startActivity(new Intent(this, TestLiveDataBusActivity.class));
         //发送消息
         //LiveDataBus.getInstance().with("data", String.class).setValue("jhao");
         Intent intent = new Intent(this, TestLiveDataBusActivity.class);
-        startActivity(intent);
+
         new Thread() {
             @Override
             public void run() {
                 for (int i = 0; i < 10; i++) {
                     //发送消息
-                    LiveDataBus.getInstance().with("data", String.class).postValue("jett");
+//                    LiveDataBus.getInstance().with("data", String.class).postValue("Jhao" + mNameViewModel.i++);
+                    LiveDataBusX.getInstance().with("data", String.class).postValue("Jhao" + mNameViewModel.i++);
                     try {
-                        Log.e(TAG, "run: " + i);
-                        Thread.sleep(5000);
+                        Log.e(TAG, "data source : " + mNameViewModel.i);
+                        Thread.sleep(2000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
             }
         }.start();
+        SystemClock.sleep(5000);
+        startActivity(intent);
     }
 }

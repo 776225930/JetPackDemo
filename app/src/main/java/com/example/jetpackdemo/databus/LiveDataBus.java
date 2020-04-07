@@ -1,5 +1,8 @@
 package com.example.jetpackdemo.databus;
 
+import android.util.Log;
+
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import java.util.HashMap;
@@ -11,6 +14,7 @@ import java.util.Map;
  * @describe
  */
 public class LiveDataBus {
+    private static final String TAG = LiveData.class.getSimpleName();
     //存放订阅者
     private static Map<String, MutableLiveData<Object>> bus;
     private static LiveDataBus instance = new LiveDataBus();

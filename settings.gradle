@@ -1,1 +1,2 @@
 include ':app', ':databindingdemo', ':navigationdemo'
+include ':pagingdemo'
