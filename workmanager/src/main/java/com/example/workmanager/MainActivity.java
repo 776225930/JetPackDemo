@@ -60,7 +60,24 @@ public class MainActivity extends AppCompatActivity {
         WorkManager.getInstance(this).enqueue(oneTimeWorkRequest);
     }
 
+    /**
+     * 多个
+     *
+     * @param view
+     */
     public void testBackgroundWork2(View view) {
+        //单一的一次任务
+        OneTimeWorkRequest oneTimeWorkRequest = new OneTimeWorkRequest.Builder(MainWorkManager2.class).build();
+        OneTimeWorkRequest oneTimeWorkRequest2 = new OneTimeWorkRequest.Builder(MainWorkManager3.class).build();
+        OneTimeWorkRequest oneTimeWorkRequest3 = new OneTimeWorkRequest.Builder(MainWorkManager4.class).build();
+        OneTimeWorkRequest oneTimeWorkRequest4 = new OneTimeWorkRequest.Builder(MainWorkManager5.class).build();
+
+        //顺序执行
+        WorkManager.getInstance(this).beginWith(oneTimeWorkRequest)
+                .then(oneTimeWorkRequest2)
+                .then(oneTimeWorkRequest3)
+                .then(oneTimeWorkRequest4)
+                .enqueue();
     }
 
     public void testBackgroundWork3(View view) {
