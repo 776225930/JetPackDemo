@@ -33,6 +33,7 @@ public class MainWorkManager2 extends Worker {
     public Result doWork() {
         Log.e(TAG, "doWork: 后台任务开始执行...");
         SystemClock.sleep(3000);
+        Log.e(TAG, "doWork: I am done" );
         return new Result.Success();
     }
 }

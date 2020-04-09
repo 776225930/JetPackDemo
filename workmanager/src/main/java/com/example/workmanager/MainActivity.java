@@ -11,6 +11,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author Jianghao
  * @date 2020/4/9 23:06
@@ -73,9 +76,22 @@ public class MainActivity extends AppCompatActivity {
         OneTimeWorkRequest oneTimeWorkRequest4 = new OneTimeWorkRequest.Builder(MainWorkManager5.class).build();
 
         //顺序执行
-        WorkManager.getInstance(this).beginWith(oneTimeWorkRequest)
+       /* WorkManager.getInstance(this).beginWith(oneTimeWorkRequest)
                 .then(oneTimeWorkRequest2)
                 .then(oneTimeWorkRequest3)
+                .then(oneTimeWorkRequest4)
+                .enqueue();*/
+        //并发执行 旧版本  2  3  同时执行，执行完成后，再执行 4 5
+       /* WorkManager.getInstance(this).beginWith(oneTimeWorkRequest, oneTimeWorkRequest2)
+                .then(oneTimeWorkRequest3)
+                .then(oneTimeWorkRequest4)
+                .enqueue();*/
+        // 把Request 存入集合
+        List<OneTimeWorkRequest> oneTimeWorkRequestList = new ArrayList<>();
+        oneTimeWorkRequestList.add(oneTimeWorkRequest);// 测试：没有并行
+        oneTimeWorkRequestList.add(oneTimeWorkRequest2);// 测试：没有并行
+        oneTimeWorkRequestList.add(oneTimeWorkRequest3);// 测试：没有并行
+        WorkManager.getInstance(this).beginWith(oneTimeWorkRequestList)
                 .then(oneTimeWorkRequest4)
                 .enqueue();
     }

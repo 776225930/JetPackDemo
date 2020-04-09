@@ -2,6 +2,7 @@ package com.example.workmanager;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.SystemClock;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -31,6 +32,8 @@ public class MainWorkManager4 extends Worker {
     @Override
     public Result doWork() {
         Log.e(TAG, "doWork: 后台任务开始执行...");
+        SystemClock.sleep(4000);
+        Log.e(TAG, "doWork: I am done" );
         return new Result.Success();
     }
 }
